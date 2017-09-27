@@ -50,3 +50,16 @@ section.has-light-background {
 // Theme template ------------------------------
 @import "../template/theme";
 // ---------------------------------------------
+
+section {
+    .cols {
+        display: flex;
+        > div {
+            width: 50%;
+
+            ol {
+                font-size: 1.8rem;
+            }
+        }
+    }
+}

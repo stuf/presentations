@@ -27,379 +27,50 @@
   <div class="reveal">
     <div class="slides">
       <section>
-        <h1>Asynchronic Javascript Workshop</h1>
-        <p>Stefan Rimaila / <a href="https://twitter.com/piparkaq">@piparkaq</a></p>
+        <h2>Asynchronic Programming Workshop</h2>
+        <p>Stefan Rimaila / <a href="https://twitter.com">@piparkaq</a></p>
       </section>
 
       <section>
-        <h2>Background</h2>
+        <h2>Agenda</h2>
+
+        <div class="cols">
+          <div>
+            <h3>Overview part</h3>
+            <ol>
+              <li><em>This slide</em></li>
+              <li>A brief history of async in JS</li>
+              <li>Problems in asynchronous JS</li>
+              <li>Looking into Observables</li>
+              <li>Advantages of Observables</li>
+              <li>Pitfalls of Observables</li>
+              <li>What is a value?</li>
+              <li>Top 10 Things You Did Not Know About Observables</li>
+            </ol>
+          </div>
+
+          <div>
+            <h3>Hands-on part</h3>
+            <ol>
+              <li>Thinking through a timeline</li>
+              <li>Excercise: Simple Events</li>
+              <li>Creating alternate timelines</li>
+              <li>Excercise: Events, continued</li>
+              <li>Smashing timelines back together</li>
+              <li>Excercise: You're Smarter Than You Think (Combinators)</li>
+              <li>Ending one timeline and starting a second</li>
+              <li>Excercise: Take a REST</li>
+              <li>Parallel timelines</li>
+              <li>Excercise: Combinators, values, errors and you</li>
+            </ol>
+          </div>
+        </div>
       </section>
 
-      <section>
-        <h2>Why async? 1/2</h2>
-
-        <p class="fragment">Time-consuming operations</p>
-
-        <p class="fragment"><small>Reading large files, performing a HTTP request</small></p>
-
-        <p class="fragment">Won't block the program from continuing while performing action</p>
-
-        <p class="fragment">In general, operations that we don't know when they will complete</p>
-      </section>
-
-      <section>
-        <h2>Why async? 2/2</h2>
-
-        <p class="fragment">Async workflows allow some fairly unique coding styles</p>
-
-        <p class="fragment">Allows us to be more declarative where it matters</p>
-
-        <p class="fragment">??? PROFIT</p>
-      </section>
-
-      <section>
-        <section>
-          <h2>History of Asynchronic Javascript</h2>
-
-          <p class="fragment">Events</p>
-
-          <p class="fragment">Callback style</p>
-
-          <p class="fragment">Promises</p>
-
-          <p class="fragment">Observables</p>
-
-        </section>
-
-        <section>
-          <h2>Events 1/3</h2>
-
-          <p class="fragment">Explicit subscription of event(s) to monitor</p>
-
-          <p class="fragment">
-            <small><code>onClick</code>, <code>onMouseMove</code></small>
-          </p>
-
-          <p class="fragment">Event handler given a handler function</p>
-
-          <pre class="fragment"><code class="typescript" data-trim data-noescape>
-            type EventHandler = (e: Event) => void
-          </code></pre>
-
-          <pre class="fragment"><code class="javascript" data-trim data-noescape>
-            document.addEventListener('mousemove', mouseMoveHandlerFn);
-
-            $('body').addEventListener('click', clickHandlerFn);
-          </code></pre>
-        </section>
-
-        <section>
-          <h2>Events 2/3</h2>
-
-          <p class="fragment">Difficult to pass value from event around</p>
-          <pre class="fragment"><code class="typescript" data-trim data-noescape>
-            (e: Event) => void // <- remember, return type is void
-          </code></pre>
-
-          <pre class="fragment"><code class="javascript" data-trim data-noescape>
-            let value;
-
-            textField.addEventListener('change', event => {
-              value = event.target.value;
-            });
-
-            // Doesn't work, value will always be undefined
-            module.exports = value;
-          </code></pre>
-        </section>
-
-        <section>
-          <h2>Events 3/3</h2>
-
-          <p class="fragment">If we do something with the result right away, no problem.</p>
-
-          <p class="fragment">But, if we want to pass the value around, we'll either end up by</p>
-
-          <p class="fragment">
-            1) listening to the same events in multiple places
-          </p>
-          <p class="fragment">
-            2) or aggregating events from a single location with our own events
-          </p>
-
-          <p class="fragment">
-            Combining event results is laborous
-          </p>
-        </section>
-
-        <section>
-          <h2>Continuation-passing style</h2>
-          <p>Familiarly, how Node.js does callback style</p>
-        </section>
-
-        <section>
-          <h2>Continuation-passing style 1/3</h2>
-
-          <p class="fragment">Standardized, battle-tested</p>
-
-          <p class="fragment">Concept has been around since 1975</p>
-
-          <p class="fragment">Action is given a function to call on completion/error</p>
-
-          <pre class="fragment"><code class="javascript" data-trim data-noescape>
-            asyncFunction(params, callbackFn);
-          </code></pre>
-
-          <pre class="fragment"><code class="typescript" data-trim data-noescape>
-            type CallbackFn = (err?: Error, result?: any) => void;
-          </code></pre>
-
-          <pre class="fragment"><code class="javascript" data-trim data-noescape>
-            // Read a file without blocking
-            fs.readFile('foo.txt', (err, data) => {
-              if (err) throw err;
-              // ...
-            })
-          </code></pre>
-        </section>
-
-        <section>
-          <h2>Continuation-passing style 2/3</h2>
-
-          <p class="fragment">Like events, great for handling async operations in-scope</p>
-
-          <p class="fragment">But there might be a special type of Hell waiting for the unsuspecting.</p>
-
-          <pre class="fragment"><code data-trim data-noescape>
-            fs.readdir(source, function (err, files) {
-              if (err) throw err;
-
-              files.forEach(function (filename, fileIndex) {
-                gm(source + filename).size(function (err, values) {
-                  if (err) throw err;
-
-                  aspect = (values.width / values.height)
-                  widths.forEach(function (width, widthIndex) {
-                    height = Math.round(width / aspect)
-                    console.log('resizing ' + filename + 'to ' + height + 'x' + height)
-                    this.resize(width, height).write(dest + 'w' + width + '_' + filename, function(err) {
-                      if (err) throw err;
-                    })
-                  }.bind(this))
-                })
-              })
-            })
-          </code></pre>
-        </section>
-
-        <section>
-          <h2>Continuation-passing style 3/3</h2>
-
-          <p class="fragment">Again, problem with passing value around</p>
-
-          <pre class="fragment"><code class="typescript" data-trim data-noescape>
-            type CallbackFn = (err?: Error, result?: any) => void;
-            // like my soul, the void can never give anything meaningful to the world
-          </code></pre>
-        </section>
-
-        <section>
-          <h2>Promises</h2>
-
-          <p class="fragment">
-            You can even make ones you can't keep without repercussions.
-          </p>
-        </section>
-
-        <section>
-          <h2>Promises 1/?</h2>
-
-          <p class="fragment">Object for holding a future value</p>
-
-          <p class="fragment">Concept from 1976, studied since the 80's extensively</p>
-
-          <p class="fragment">Mainstream Promises comply with the
-            <a href="https://promisesaplus.com/">Promises/A+</a> spec
-          </p>
-        </section>
-
-        <section>
-          <h2>Promises 2/?</h2>
-
-          <pre class="fragment"><code class="typescript" data-trim data-noescape>
-            interface Promise&lt;T&gt; {
-              then(...): Promise&lt;U&gt;;
-              catch(...): Promise&lt;U&gt;;
-            }
-          </code></pre>
-
-          <p class="fragment">
-            Declares an interface for specifying a <em>single</em> future value
-            <p class="fragment"><small>
-              <code>Promise.resolve</code>, <code>Promise.reject</code>, <code>Promise.all</code>
-            </small></p>
-          </p>
-
-          <p class="fragment">Can be passed around (yay!)</p>
-        </section>
-
-        <section>
-          <h2>Promises 3/?</h2>
-
-          <p class="fragment">Browsers have supported Promises natively for a long while</p>
-
-          <p class="fragment">Many browser APIs use Promises</p>
-
-          <pre class="fragment"><code class="javascript" data-trim data-noescape>
-            // src/api.js
-            const apiRequest = fetch('https://...');
-
-            module.exports = apiRequest
-          </code></pre>
-
-          <pre class="fragment"><code class="javascript" data-trim data-noescape>
-              // src/somewhere-else.js
-              const response = require('./api.js');
-
-              response.then(res => console.log('Response:', res));
-
-              // => "Response: ..."
-          </code></pre>
-
-          <p class="fragment">(っ˘ω˘ς ) Happiness.</p>
-        </section>
-
-        <section>
-          <h2>Promises 4/?</h2>
-
-          <p class="fragment">Can be chained</p>
-
-          <p class="fragment"><small>A Promise that resolves into a new Promise, that resolves into another new Promise...</small></p>
-
-          <p class="fragment">Can be combined</p>
-
-          <p class="fragment"><small>Do something when a list of Promises have all resolved or when any one is rejected</small></p>
-
-          <p class="fragment">( ´ ▽ ` ).｡ｏ♡</p>
-        </section>
-
-        <section>
-          <h2>Promises 5/?</h2>
-
-          <p class="fragment">But</p>
-
-          <p class="fragment">Remember, only for a <em>single value</em></p>
-
-          <p class="fragment">∠( ᐛ 」∠)＿</p>
-
-          <p class="fragment">So Promises for things like events is not practical</p>
-        </section>
-
-        <section>
-          <h2>Streams</h2>
-
-          <p>Or: Observables</p>
-        </section>
-
-        <section>
-          <h2>Streams 1/?</h2>
-
-          <p class="fragment">Turbocharged Promises</p>
-
-          <p class="fragment">Represents multiple future values</p>
-
-          <p class="fragment">Can be filtered, mapped, reduced</p>
-
-          <p class="fragment">Can be combined, merged, chained</p>
-        </section>
-
-        <section>
-          <h2>Streams 2/?</h2>
-
-          <p class="fragment">The catch</p>
-
-          <p class="fragment">
-            Can be difficult to get into, abstract
-          </p>
-
-          <p class="fragment"><small>
-            Data is hidden into an object, can't be handled like normal data
-          </small></p>
-
-          <pre class="fragment"><code class="javascript" data-trim data-noescape>
-            const observableAPlusB = observableA + observableB;
-            // => "[property][property]"
-            // this is not a number you are lying to me
-          </code></pre>
-        </section>
-
-        <section>
-          <h2>Streams 3/?</h2>
-
-          <p class="fragment">Things you can do</p>
-        </section>
-
-        <section>
-          <p>Create an Observable out of click events</p>
-          <p><small>Very useful click counter</small></p>
-          <pre class="fragment"><code class="javascript" data-trim data-noescape>
-            const buttonClicks = Kefir.fromEvents(button, 'click');
-
-            const clickCount = buttonClicks.scan(total => total + 1, 0);
-
-            clickCount.log('clicks');
-            // [click]
-            // clicks &lt;value&gt; 1
-            // [click]
-            // clicks &lt;value&gt; 2
-          </code></pre>
-        </section>
-
-        <section>
-          <p>Turn Promises into Observables</p>
-          <pre class="fragment"><code class="javascript" data-trim data-noescape>
-            const apiRequest = Kefir.fromPromise(fetch('https://...'));
-          </code></pre>
-        </section>
-
-        <section>
-          <p>Create new values based on existing values</p>
-          <p><small>Take mouse position, create two separate streams for the X and Y position.</small></p>
-          <pre class="fragment"><code class="javascript" data-trim data-noescape>
-            const mousePos = Kefir.fromEvents(document.body, 'mousemove');
-
-            const mouseX = mousePos.map(e => e.clientX); // only has mouse X position
-            const mouseY = mousePos.map(e => e.clientY); // only has mouse Y position
-          </code></pre>
-        </section>
-        <!-- <pre class="fragment"><code class="javascript" data-trim data-noescape>
-
-          </code></pre> -->
-
-        <section>
-          <p>Emit value on condition</p>
-          <p class="fragment"><small>Still remember <code>clickCount</code> I showed before?</small></p>
-
-          <pre class="fragment"><code class="javascript" data-trim data-noescape>
-            // Only start emitting values after we've clicked 50 times
-            const over50Clicks = clickCount.skipWhile(x => x < 50);
-
-            // Only emit a value when the click count is an even number
-            const evenNumberOfClicks = clickCount.filter(x => x % 2 === 0);
-          </code></pre>
-        </section>
-
-        <section>
-          <p>Combine values</p>
-          <p class="fragment"><small>Calculate a useful sum of the mouse X and Y position</small></p>
-
-          <pre class="fragment"><code class="javascript" data-trim data-noescape>
-            const mouseSum =
-              Kefir.combine([mouseX, mouseY]) // emits value when either one emits a value
-                   .map(([x, y]) => x + y)
-          </code></pre>
-        </section>
-      </section>
+      <section data-markdown="md/brief-history.md"></section>
+      <!-- <section data-markdown="md/problems-in-async-js.md"></section>
+      <section data-markdown="md/looking-into-observables.md"></section>
+      <section data-markdown="md/advantages-of-observables.md"></section> -->
     </div>
   </div>
 
@@ -415,6 +86,9 @@
       width: 1280,
       height: 800,
       slideNumber: 'c/t',
+      markdown: {
+        smartypants: true
+      },
       dependencies: [
         { src: 'plugin/markdown/marked.js' },
         { src: 'plugin/markdown/markdown.js' },
