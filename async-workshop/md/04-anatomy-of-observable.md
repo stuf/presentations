@@ -18,11 +18,13 @@ v-v-v
 
 ## Observables
 
-Containers for data
+Essentially containers for data <!-- .element: class="fragment" -->
 
-They have a lifecycle
+They have a lifecycle <!-- .element: class="fragment" -->
 
+<p>
 `value`, `error` and `end`
+</p> <!-- .element: class="fragment" -->
 
 note:
 
@@ -55,19 +57,21 @@ v-v-v
 
 ## Creating simple Observables
 
-```js
-// An Observable that will emit a value instantly and then end
-const simpleValue = Kefir.constant(123);
+<p>`Kefir.constant(123)`</p> <!-- .element: class="fragment" -->
 
-// An Observable that will emit an error and then end.
-const error = Kefir.constantError('Please help me');
+<small>Observable that emits a value</small> <!-- .element: class="fragment" -->
 
-// An Observable that will never emit anything
-const alreadyOver = Kefir.never('Nobody will ever notice me');
+`Kefir.constantError('error message')` <!-- .element: class="fragment" -->
 
-// An Observable that will emit a value after three seconds
-const late = Kefir.later(3000, 'Sorry I\'m late');
-```
+<small>Observable that emits an error</small> <!-- .element: class="fragment" -->
+
+`Kefir.never('foo')` <!-- .element: class="fragment" -->
+
+<small>Observable that has already ended</small> <!-- .element: class="fragment" -->
+
+`Kefir.later(1000, 'I\'m late')` <!-- .element: class="fragment" -->
+
+<small>Observable that emits a value later</small> <!-- .element: class="fragment" -->
 
 note:
 
@@ -80,11 +84,11 @@ v-v-v
 
 ## Observing Observables 1/2
 
-_All Observables_ have functions for observing
+<p>_All Observables_ have functions for observing</p> <!-- .element: class="fragment" -->
 
-The only function you can use to interact with the outside world
+The only function you can use to interact with the outside world <!-- .element: class="fragment" -->
 
-There exist `onValue`, `onError` and `onEnd` functions
+<p>There exist `onValue`, `onError` and `onEnd` functions</p> <!-- .element: class="fragment" -->
 
 ```js
 simpleValue.onValue(value => console.log('I got a value!', value));
@@ -95,6 +99,7 @@ simpleValue.onEnd(() => console.info('Stream ended'));
 
 simpleValue.observe(onValue, onError, onEnd);
 ```
+ <!-- .element: class="fragment" -->
 
 note:
 
@@ -110,11 +115,11 @@ v-v-v
 
 ## Observing Observables 2/2
 
-_All Observers_ also have a `log` method
+<p>_All Observers_ also have a `log` method</p> <!-- .element: class="fragment" -->
 
-Good for debugging, prints the value in the console
+Good for debugging, prints the value in the console <!-- .element: class="fragment" -->
 
-Works as a _pass-through version_ of `observe`
+<p>Works as a _pass-through version_ of `observe`</p> <!-- .element: class="fragment" -->
 
 ```js
 simpleValue.log('simple value');
@@ -125,6 +130,7 @@ error.log('an error');
 
 // => an error <error> "Please help me"
 ```
+<!-- .element: class="fragment" -->
 
 note:
 
@@ -135,8 +141,8 @@ v-v-v
 
 ## Observables in Summary
 
-Observables emit `value`, `error` or `end`
+<p>Observables emit `value`, `error` or `end`</p> <!-- .element: class="fragment" -->
 
-Observables can be `observe`d
+<p>Observables can be `observe`d</p> <!-- .element: class="fragment" -->
 
-Observables can be `log`ged
+<p>Observables can be `log`ged</p> <!-- .element: class="fragment" -->

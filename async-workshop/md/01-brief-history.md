@@ -1,6 +1,6 @@
 ## Brief history of async JS
 
----
+v-v-v
 
 ### The Players
 
@@ -14,7 +14,7 @@ Streams
 
 <small>There are more, but these ones are the most relevant</small>
 
----
+v-v-v
 
 ### Generally speaking
 
@@ -30,7 +30,7 @@ note:
 - Like above, perform task only when required
 - Wait until the desired data is there
 
----
+v-v-v
 
 ### Events
 
@@ -51,7 +51,7 @@ note:
 - passing value around requires laborous solutions, like event aggregation
 - this is perfectly fine for some things, but we can do better
 
----
+v-v-v
 
 ### Callbacks / CPS
 
@@ -73,7 +73,7 @@ note:
 - some workarounds exist, but solutions concentrate on handling the result there and then
 - not really meant for combinators etc.
 
----
+v-v-v
 
 ### Promises
 
@@ -93,7 +93,7 @@ note:
 - it's just a box for eventual data
 - value and error passed in parallel
 
----
+v-v-v
 
 ### Streams
 
@@ -113,7 +113,7 @@ note:
 - value and error passed in parallel
 - simple building blocks, allows for creating complex behavior
 
----
+v-v-v
 
 ### Things worth noticing
 
@@ -131,7 +131,7 @@ note:
 - great for passing value/error to relevant portion
 - expressive code in fewer lines
 
----
+v-v-v
 
 Concepts unique compared to imperative code  <!-- .element: class="fragment" -->
 

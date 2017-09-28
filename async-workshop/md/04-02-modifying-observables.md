@@ -1,8 +1,8 @@
 ## Modifying Observables
 
-Derived data
+Derived data <!-- .element: class="fragment" -->
 
-<small>Or _dependent computations_</small>
+<small>Or _dependent computations_</small> <!-- .element: class="fragment" -->
 
 note:
 
@@ -13,9 +13,9 @@ v-v-v
 
 ## A misnomer
 
-Observables can't be modified
+Observables can't be modified <!-- .element: class="fragment" -->
 
-Derive data into new Observables
+Derive data into new Observables <!-- .element: class="fragment" -->
 
 [chart]
 
@@ -27,13 +27,13 @@ v-v-v
 
 ## Deriving data
 
-`map` is your friend
+<p>`map` is your friend</p> <!-- .element: class="fragment" -->
 
-You might be familiar with these
+You might be familiar with these <!-- .element: class="fragment" -->
 
-`listOfThings.map(someFunction)`
+`listOfThings.map(someFunction)` <!-- .element: class="fragment" -->
 
-`this.props.items.map(x => ...)`
+`this.props.items.map(x => ...)` <!-- .element: class="fragment" -->
 
 note:
 
@@ -46,15 +46,15 @@ v-v-v
 
 ## Deriving Data
 
-`map` works identical with Observables
+<p>`map` works the same way here</p> <!-- .element: class="fragment" -->
 
-`obs.map(someFunction)`
+`obs.map(someFunction)` <!-- .element: class="fragment" -->
 
-For every value* in `obs`, apply `someFunction`
+<p>For every value* in `obs`, apply `someFunction`</p> <!-- .element: class="fragment" -->
 
-<small>* every existing and future value</small>
+<small>* every existing and future value</small> <!-- .element: class="fragment" -->
 
-Results in a new, separate Observable
+Results in a new, separate Observable <!-- .element: class="fragment" -->
 
 note:
 
@@ -90,30 +90,67 @@ note:
 
 v-v-v
 
-## Great Power
+## Useful
 
-`map` alone gives us great power
+<p>`map` alone gives us great power</p> <!-- .element: class="fragment" -->
 
-We can modify data into new data
+We can modify data into new data <!-- .element: class="fragment" -->
 
-We can pass that modified data somewhere else
+We can pass that modified data somewhere else <!-- .element: class="fragment" -->
 
-Updated whenever original data updates
+Updated whenever original data updates <!-- .element: class="fragment" -->
 
 note:
 
 - this alone enables us to do great things
+- we can create new data without much effort
+- because observables are lazy, we only use as the resources we need
 
 v-v-v
 
 ## Not just values
 
-Errors can be mapped, too
+Errors can be mapped, too <!-- .element: class="fragment" -->
 
-Values and errors coexist in Observables
+Values and errors coexist in Observables <!-- .element: class="fragment" -->
 
-`map` for values
+<p>`map` for values</p> <!-- .element: class="fragment" -->
 
-`mapErrors` for errors
+<p>`mapErrors` for errors</p> <!-- .element: class="fragment" -->
 
-`obs.mapErrors(oldErr => newErr)`
+<p>`obs.mapErrors(oldErr => newErr)`</p> <!-- .element: class="fragment" -->
+
+note:
+
+- errors go in parallel with values
+- errors and values have both separate operations
+- `map` does not work on errors
+- `mapErrors` does not work on values
+
+---
+
+### Exercise
+
+Open `exercise-mapping.js`
+
+Fill `undefined` values
+
+---
+
+## Modifying Observables, part 2
+
+<p>`map` is just one of many</p> <!-- .element: class="fragment" -->
+
+<p>`filter`, `scan`, `debounce`</p> <!-- .element: class="fragment" -->
+
+<p>`take`, `takeWhile`, `takeErrors`</p> <!-- .element: class="fragment" -->
+
+<p>`skip`, `skipWhile`, `skipErrors`</p> <!-- .element: class="fragment" -->
+
+v-v-v
+
+## Exercise
+
+Open `exercise-after-map.js`
+
+Fill `undefined` values
