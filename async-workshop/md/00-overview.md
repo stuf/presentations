@@ -3,6 +3,7 @@
  1. _This slide_
  2. Brief history of asynchronous Javascript
  3. Problems caused by asynchronicity
+ 4. The Anatomy of an Observable
 
 ---
 
