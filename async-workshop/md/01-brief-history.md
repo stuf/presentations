@@ -21,7 +21,7 @@ Streams
 Advantages:
 
 - Non-blocking
-- Parallel operations 
+- Parallel operations
 - ???
 
 note:
@@ -40,7 +40,9 @@ Pub-sub messaging
 
 Difficult to pass result around
 
-Combining separate results is onerous
+Combining multiple results is annoying
+
+Small cost upfront, hidden costs
 
 note:
 
@@ -53,7 +55,7 @@ note:
 
 ### Callbacks / CPS
 
-Node.js introduced continuous-passing style (callbacks) for async
+Node.js began using continuous-passing style (callbacks) for async
 
 Operation is given function to call when done
 
@@ -61,7 +63,7 @@ The Callback Hell is real
 
 Difficult to pass result around
 
-Combining separate results is onerous
+Combining multiple results is annoying
 
 note:
 
@@ -69,6 +71,7 @@ note:
 - operation takes callback function as last param to call when done
 - but same problems as events
 - some workarounds exist, but solutions concentrate on handling the result there and then
+- not really meant for combinators etc.
 
 ---
 
@@ -85,6 +88,7 @@ Gateway drug to Streams
 note:
 
 - old idea as well, studied since 1980's, concept from 1970's
+- popularized as deferreds back in 2011 by jquery, among others
 - can be passed around to where the result is wanted
 - it's just a box for eventual data
 - value and error passed in parallel
@@ -96,6 +100,8 @@ note:
 Represents a _stream_ of a future value or values
 
 Values are independent of time
+
+Easy to combine with other streams
 
 Like Promises, can be passed around easily like normal data
 
@@ -127,11 +133,11 @@ note:
 
 ---
 
-Conceps unique compared to imperative code
+Concepts unique compared to imperative code  <!-- .element: class="fragment" -->
 
-Makes your head hurt if only familiar with imperative code
+Makes your head hurt if only familiar with imperative code <!-- .element: class="fragment" -->
 
-<img src="img/sad_otter.jpg" style="width: 30%">
+<img src="img/foochan.jpg" style="width: 30%"> <!-- .element: class="fragment" -->
 
 note:
 

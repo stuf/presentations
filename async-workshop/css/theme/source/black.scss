@@ -22,8 +22,8 @@ $mainColor: #fff;
 $headingColor: #fff;
 
 $mainFontSize: 42px;
-$mainFont: 'Source Sans Pro', Helvetica, sans-serif;
-$headingFont: 'Source Sans Pro', Helvetica, sans-serif;
+$mainFont: 'Overpass', Helvetica, sans-serif;
+$headingFont: 'Overpass', Helvetica, sans-serif;
 $headingTextShadow: none;
 $headingLetterSpacing: normal;
 $headingTextTransform: uppercase;
@@ -47,6 +47,10 @@ section.has-light-background {
     font-family: Iosevka;
 }
 
+.reveal section code {
+    font-family: 'Overpass Mono';
+}
+
 // Theme template ------------------------------
 @import "../template/theme";
 // ---------------------------------------------
@@ -61,5 +65,6 @@ section {
                 font-size: 1.8rem;
             }
         }
+
     }
 }
