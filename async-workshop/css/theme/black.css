@@ -310,3 +310,11 @@ section .cols {
   font-size: 0.9em;
   display: inline-block;
   font-weight: 400; }
+
+.front-slide h2 {
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4); }
+
+.front-slide p {
+  display: inline-block;
+  padding: 0.1rem 0.9rem;
+  background: rgba(0, 0, 0, 0.8); }
