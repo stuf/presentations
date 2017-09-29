@@ -34,16 +34,7 @@ note:
 
 v-v-v
 
-## In pictures
-
-```
-|----(1)----(2)----(3)----e----X
-
-            | = start
-(1), (2), (3) = values
-            e = error
-            X = end
-```
+<img src="img/stream.jpg">
 
 note:
 
@@ -52,6 +43,10 @@ note:
 - they may emit `value`s or `error`s
 - they may or may not `end`
 - `end`ing and observable means if we end up emitting values from it, they will get ignored
+
+v-v-v
+
+<img src="img/stream-example.png" style="background: #fff">
 
 v-v-v
 
