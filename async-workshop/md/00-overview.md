@@ -29,3 +29,26 @@ If time allows
  2. Lazy Computations
  3. Point-free Observables
  4. What is a value, exactly
+
+v-v-v
+
+## Background
+
+Front-end since 2008 <!-- .element: class="fragment" -->
+
+<p>Worked previously at <a href="https://fusetools.com">Fusetools</a> in Oslo</p> <!-- .element: class="fragment" -->
+
+Part of the Lean UX Tribe <!-- .element: class="fragment" -->
+
+Currently at OP <!-- .element: class="fragment" -->
+
+<p>Working on SPA in <a href="https://github.com/calmm-js">Calmm.js</a></p> <!-- .element: class="fragment" -->
+
+<small>React stack w/ Observables, no Redux, zero `class` components</small> <!-- .element: class="fragment" -->
+
+note:
+
+- specializing in reactive programming through various means
+- OP project is pretty cool, but a total mindfuck at first
+- POC in march, some legacy cleanup still remaining
+- result starting to look pretty sweet
