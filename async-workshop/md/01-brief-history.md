@@ -18,31 +18,22 @@ v-v-v
 
 ### Generally speaking
 
-Advantages:
-
-- Non-blocking
-- Parallel operations
-- ???
-
-note:
-
-- fs.readFile and readFileSync for a 1GB file
-- Like above, perform task only when required
-- Wait until the desired data is there
+Non-blocking <!-- .element: class="fragment" -->
+Parallel operations <!-- .element: class="fragment" -->
 
 v-v-v
 
 ### Events
 
-Supported since Netscape times
+Supported since Netscape times <!-- .element: class="fragment" -->
 
-Pub-sub messaging
+Pub-sub messaging <!-- .element: class="fragment" -->
 
-Difficult to pass result around
+Difficult to pass result around <!-- .element: class="fragment" -->
 
-Combining multiple results is annoying
+Combining multiple results is annoying <!-- .element: class="fragment" -->
 
-Small cost upfront, hidden costs
+Small cost upfront, hidden costs <!-- .element: class="fragment" -->
 
 note:
 
@@ -55,15 +46,15 @@ v-v-v
 
 ### Callbacks / CPS
 
-Node.js began using continuous-passing style (callbacks) for async
+Node.js began using continuous-passing style (callbacks) for async <!-- .element: class="fragment" -->
 
-Operation is given function to call when done
+Operation is given function to call when done <!-- .element: class="fragment" -->
 
-The Callback Hell is real
+The Callback Hell is real <!-- .element: class="fragment" -->
 
-Difficult to pass result around
+Difficult to pass result around <!-- .element: class="fragment" -->
 
-Combining multiple results is annoying
+Combining multiple results is annoying <!-- .element: class="fragment" -->
 
 note:
 
@@ -77,13 +68,13 @@ v-v-v
 
 ### Promises
 
-Introduced into JS fairly "recently"
+Introduced into JS fairly "recently" <!-- .element: class="fragment" -->
 
-_Proxy object_ for future data
+<p>_Proxy object_ for future data</p> <!-- .element: class="fragment" -->
 
-Can be passed around like normal data
+Can be passed around like normal data <!-- .element: class="fragment" -->
 
-Gateway drug to Streams
+Gateway drug to Streams <!-- .element: class="fragment" -->
 
 note:
 
@@ -97,13 +88,13 @@ v-v-v
 
 ### Streams
 
-Represents a _stream_ of a future value or values
+<p>Represents a _stream_ of a future value or values</p> <!-- .element: class="fragment" -->
 
-Values are independent of time
+Values are independent of time <!-- .element: class="fragment" -->
 
-Easy to combine with other streams
+Easy to combine with other streams <!-- .element: class="fragment" -->
 
-Like Promises, can be passed around easily like normal data
+Like Promises, can be passed around easily like normal data <!-- .element: class="fragment" -->
 
 note:
 
@@ -115,15 +106,13 @@ note:
 
 v-v-v
 
-### Things worth noticing
+### Promises and Observables
 
-Both Promises and Streams allow:
+Easy to combine multiple values into one <!-- .element: class="fragment" -->
 
-Combining multiple values into one
+Values and errors move in parallel <!-- .element: class="fragment" -->
 
-Values and errors in parallel
-
-Allows for declarative code where it matters
+Allows for declarative code where it matters <!-- .element: class="fragment" -->
 
 note:
 

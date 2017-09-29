@@ -80,3 +80,7 @@ Might give illusion not to learn Promises, leading to confusion <!-- .element: c
 </div>
 
 Which do you think is faster? <!-- .element: class="fragment" -->
+
+v-v-v
+
+But it's not an issue we can't solve

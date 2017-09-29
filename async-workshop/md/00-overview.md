@@ -12,7 +12,6 @@ v-v-v
  2. Modifying observables
  3. Working with Events and Promises
  4. Chaining Observables
- 5. Combinators: you're smarter than you think
 
 note:
 
@@ -22,9 +21,11 @@ note:
 
 v-v-v
 
-### Advanced hands-on (3/2)
+## Additional things (3/2)
 
 If time allows
 
- 1. Creating Undo functionality
-
+ 1. Observable combinators<br><small>AKA "you're smarter than you think"</small>
+ 2. Lazy Computations
+ 3. Point-free Observables
+ 4. What is a value, exactly

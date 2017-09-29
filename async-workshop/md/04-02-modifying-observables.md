@@ -17,11 +17,17 @@ Observables can't be modified <!-- .element: class="fragment" -->
 
 Derive data into new Observables <!-- .element: class="fragment" -->
 
-[chart]
+<div>
+<img src="img/fmap-magic.png">
+
+<small>From <a href="http://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html">
+Functors, Applicatives and Monads</a></small>
+</div> <!-- .element: class="fragment" -->
 
 note:
 
 - a misnomer
+- feels like *magic* happens at first
 
 v-v-v
 
@@ -60,6 +66,23 @@ note:
 
 - when I say every value in `obs`, I mean _every_ value
 - can be used to create separate, simple and specific observables
+
+v-v-v
+
+<img src="img/functor-example.png" style="height: 50vh">
+
+<small><a href="https://medium.com/@dtinth/what-is-a-functor-dcf510b098b6">What is a Functor?</a> by Thai Pangsakulyanont</small>
+
+note:
+
+- map defines a mapping from every `a` to `b`
+- is a 1:1 relationship
+
+v-v-v
+
+<img src="img/functor-example-02.png" style="max-height: 50vh">
+
+<small><a href="https://medium.com/@dtinth/what-is-a-functor-dcf510b098b6">What is a Functor?</a> by Thai Pangsakulyanont</small>
 
 v-v-v
 
@@ -141,11 +164,23 @@ Fill `undefined` values
 
 <p>`map` is just one of many</p> <!-- .element: class="fragment" -->
 
-<p>`filter`, `scan`, `debounce`</p> <!-- .element: class="fragment" -->
+v-v-v
 
-<p>`take`, `takeWhile`, `takeErrors`</p> <!-- .element: class="fragment" -->
+`filter`
 
-<p>`skip`, `skipWhile`, `skipErrors`</p> <!-- .element: class="fragment" -->
+<img src="img/rx-filter.png" width="50%">
+
+v-v-v
+
+`skipWhile`
+
+<img src="img/rx-skipwhile.png" width="50%">
+
+v-v-v
+
+`take`
+
+<img src="img/rx-take.png" width="50%">
 
 v-v-v
 
